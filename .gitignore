@@ -43,3 +43,6 @@ cache/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local guides (not for GitHub)
+GITHUB_PUSH_GUIDE.md
