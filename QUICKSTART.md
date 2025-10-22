@@ -49,38 +49,77 @@ http://localhost:8050
 
 ### 3. **Dashboard Features**
 
+#### Control Panel
+- **Refresh Data**: Manual data refresh button
+- **Auto-Refresh**: Toggle automatic updates (1/5/15 min intervals)
+- **Demo Mode**: Switch between sample and live data
+- **Dark Mode**: Toggle professional dark theme
+
+#### Advanced Filters
+- **Time Range**: Last 24h, 7 days, 30 days, or all time
+- **Attack Type**: Filter by specific attack methods
+- **Brand**: Filter by targeted brand
+- **Country**: Filter by geographic origin
+- All filters update all visualizations in real-time
+
 #### Statistics Cards
 - **Total Attacks**: See the count of detected phishing attempts
 - **Most Targeted Brand**: Which brand is most impersonated
 - **Top Source Country**: Where attacks originate from
 - **Most Common Attack**: Primary attack method
 
-#### Global Threat Map
+#### 7 Interactive Visualizations
+
+**Global Threat Map**
 - Interactive world map showing attack distribution
 - Hover over countries for details
-- Color intensity shows attack frequency
+- Color intensity shows frequency
 
-#### Brand Impersonation Treemap
+**Brand Impersonation Treemap**
 - Visual breakdown of targeted brands
 - Larger boxes = more attacks
 - Click to explore details
 
-#### Attack Timeline
+**Attack Timeline**
 - See attack trends over time
 - Different colors for different attack types
 - Hover for specific counts
+
+**Attack Pattern Heatmap** (NEW!)
+- Hour-by-hour and day-by-day patterns
+- Identify peak attack times
+- Color intensity shows frequency
+
+**Top 10 Targeted Domains** (NEW!)
+- Most frequently attacked domains
+- Horizontal bar chart
+- Prioritize defense efforts
+
+**Attack Type Distribution** (NEW!)
+- Donut chart with percentages
+- Clear breakdown of attack methods
+- Interactive legend
+
+**URL Length Distribution** (NEW!)
+- Histogram of phishing URL lengths
+- Average length indicator
+- Pattern analysis for detection
+
+## Quick Tips
+
+1. **Start with Sample Data** to see the dashboard in action immediately
+2. **Try Dark Mode** for comfortable extended viewing
+3. **Use Filters** to drill down into specific threat patterns
+4. **Enable Auto-Refresh** for live monitoring (SOC environments)
+5. **Use Live Data** for real threat intelligence
+6. **Combine Filters** for detailed analysis (e.g., "PayPal + Last 7 Days + Russia")
+7. **Export Charts** using the Plotly toolbar on each visualization
+8. **Explore Interactive Charts** - hover, click, zoom!
 
 ## Keyboard Shortcuts
 
 - **Refresh Data**: Click the "Refresh Data" button
 - **Stop Server**: Press `Ctrl+C` in terminal
-
-## Tips
-
-1. **Start with Sample Data** to see the dashboard in action immediately
-2. **Use Live Data** for real threat intelligence
-3. **Refresh Periodically** to see updated phishing campaigns
-4. **Explore Interactive Charts** - hover, click, zoom!
 
 ## Common Issues
 

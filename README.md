@@ -8,12 +8,26 @@ A real-time interactive dashboard that visualizes global phishing attacks, track
 
 ## 🌟 Features
 
+### Core Visualizations (7 Interactive Charts)
+
+#### Original Dashboard
 - **🌍 Global Threat Map**: Interactive choropleth map showing phishing attack origins by country
 - **🎯 Brand Impersonation Treemap**: Visual breakdown of most commonly targeted brands
-- **📊 Attack Timeline**: Time-series visualization of attack types and frequency
-- **📈 Real-time Statistics**: Live stats showing total attacks, top brands, countries, and attack types
-- **🔄 Auto-refresh**: Configurable data refresh intervals
+- **📊 Attack Timeline**: Time-series visualization of attack types and frequency over time
+
+#### Advanced Analytics (New!)
+- **🔥 Attack Pattern Heatmap**: Hour-by-hour and day-by-day attack patterns to identify peak threat times
+- **� Top 10 Targeted Domains**: Horizontal bar chart showing most frequently attacked domains
+- **🥧 Attack Type Distribution**: Donut chart with percentage breakdown of attack methods
+- **📏 URL Length Distribution**: Histogram analyzing phishing URL length patterns for detection
+
+### Dashboard Features
+- **�📈 Real-time Statistics**: Live stats showing total attacks, top brands, countries, and attack types
+- **🔄 Auto-refresh**: Configurable automatic data refresh (1/5/15 minute intervals)
+- **🌙 Dark Mode**: Professional dark theme for extended monitoring sessions
+- **🎚️ Advanced Filters**: Filter by time range, attack type, brand, and country
 - **💾 Smart Caching**: Efficient data caching to minimize API calls
+- **📱 Responsive Design**: Works on desktop, tablet, and mobile devices
 
 ## 🎬 Quick Start
 
@@ -99,28 +113,37 @@ davproject/
 ### 1. Header Section
 - Dashboard title and description
 - Last update timestamp
-- Refresh button for manual data updates
-- Sample data toggle switch
+- Manual refresh button
+- Auto-refresh toggle with configurable intervals (1/5/15 minutes)
+- Demo mode toggle (sample vs. live data)
+- Dark mode toggle
 
-### 2. Statistics Cards
+### 2. Statistics Cards (4 Real-time Metrics)
 - **Total Attacks**: Count of all detected phishing attempts
 - **Most Targeted Brand**: Brand with highest impersonation count
 - **Top Source Country**: Country with most phishing origins
 - **Most Common Attack**: Predominant attack type
 
-### 3. Global Threat Map
+### 3. Advanced Filters
+- **Time Range**: Last 24 hours, 7 days, 30 days, or all time
+- **Attack Type**: Filter by specific attack methods
+- **Brand**: Filter by targeted brand
+- **Country**: Filter by geographic origin
+- All filters work together and update all visualizations in real-time
+
+### 4. Global Threat Map
 - Interactive world map showing attack distribution
 - Color-coded by attack frequency
 - Hover for country-specific details
-- Based on domain TLD analysis
+- Based on domain TLD and geolocation analysis
 
-### 4. Brand Impersonation Treemap
+### 5. Brand Impersonation Treemap
 - Hierarchical visualization of targeted brands
 - Size represents attack frequency
 - Includes: PayPal, Microsoft, Google, Apple, Amazon, banks, and more
 - Interactive hover for detailed counts
 
-### 5. Attack Timeline
+### 6. Attack Timeline
 - Time-series chart of attacks over time
 - Segmented by attack type:
   - Fake Login Pages
@@ -129,6 +152,30 @@ davproject/
   - Invoice/Payment Fraud
   - Package Delivery Scams
   - Password Reset Phishing
+
+### 7. Attack Pattern Heatmap (New!)
+- Hour-by-hour attack patterns (0:00 to 23:00)
+- Day-by-day breakdown (Monday to Sunday)
+- Color intensity shows attack frequency
+- Identify peak attack times for monitoring
+
+### 8. Top 10 Targeted Domains (New!)
+- Horizontal bar chart of most attacked domains
+- Color-coded by attack volume
+- Shows specific domains being impersonated
+- Perfect for prioritizing defenses
+
+### 9. Attack Type Distribution (New!)
+- Professional donut chart with percentages
+- Clear breakdown of all attack methods
+- Visual proportions with interactive legend
+- Understand threat landscape at a glance
+
+### 10. URL Length Distribution (New!)
+- Histogram of phishing URL character lengths
+- Distribution across 30 bins with average line
+- Identify suspicious URL patterns
+- Useful for setting detection rules
 
 ## ⚙️ Configuration
 

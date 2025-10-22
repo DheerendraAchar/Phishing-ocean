@@ -36,18 +36,23 @@ davproject/
 
 ## Key Features by File
 
-### app.py
-- Dashboard layout and components
-- Callback functions for interactivity
+### app.py (~800 lines)
+- Dashboard layout with 7 visualizations
+- 11 callback functions for real-time interactivity
+- Advanced filtering system (time, attack type, brand, country)
+- Auto-refresh control logic
+- Dark mode toggle with client-side callback
 - Data refresh logic
 - Statistics card updates
-- Visualization updates
+- All visualization updates with filter support
 
 ### config.py
-- API endpoints
-- Cache settings
-- Brand keywords
-- Attack type patterns
+- API endpoints (OpenPhish, PhishTank)
+- Cache settings (1 hour TTL)
+- Auto-refresh intervals
+- Brand keywords (15+ brands)
+- Attack type patterns (6+ types)
+- Dashboard configuration (port, host, title)
 - Dashboard settings
 
 ### data_fetcher.py
@@ -63,11 +68,16 @@ davproject/
 - Country detection from TLD
 - Statistics generation
 
-### visualizations.py
-- Global threat choropleth map
-- Brand impersonation treemap
-- Attack timeline chart
-- Statistics card data
+### visualizations.py (~450 lines)
+- **7 Visualization Methods:**
+  1. `create_global_threat_map()` - Choropleth world map
+  2. `create_brand_treemap()` - Brand impersonation treemap
+  3. `create_attack_timeline()` - Time-series attack chart
+  4. `create_attack_heatmap()` - Hour/day attack pattern heatmap
+  5. `create_top_domains_chart()` - Top 10 domains bar chart
+  6. `create_attack_pie_chart()` - Attack type donut chart
+  7. `create_url_length_distribution()` - URL length histogram
+- `create_stats_cards()` - Statistics calculation for dashboard cards
 
 ## Running the Project
 

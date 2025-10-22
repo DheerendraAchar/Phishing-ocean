@@ -1,24 +1,26 @@
-# 🎣 Phishing Ocean Dashboard - Project Complete!
+# 🎣 Phishing Threat Intelligence Dashboard - Project Complete!
 
 ## ✅ What We Built
 
-A complete, production-ready cybersecurity dashboard that visualizes global phishing attacks in real-time with interactive charts and maps.
+A complete, production-ready cybersecurity dashboard that visualizes global phishing attacks in real-time with **7 interactive visualizations**, advanced filtering, auto-refresh, and dark mode support.
 
 ## 🎯 Key Features Delivered
 
-### 1. **Global Threat Map** 🌍
+### Core Visualizations (7 Interactive Charts)
+
+#### 1. **Global Threat Map** 🌍
 - Interactive choropleth world map
 - Shows phishing attack origins by country
 - Color-coded by attack frequency
 - Hover for detailed statistics
 
-### 2. **Brand Impersonation Treemap** 🎯
+#### 2. **Brand Impersonation Treemap** 🎯
 - Visual breakdown of targeted brands
 - Detects: PayPal, Microsoft, Google, Apple, Amazon, Facebook, Netflix, LinkedIn, banks, crypto, and more
 - Size represents attack frequency
 - Interactive exploration
 
-### 3. **Attack Timeline** 📊
+#### 3. **Attack Timeline** 📊
 - Time-series visualization of attacks
 - Tracks attack types:
   - Fake Login Pages
@@ -28,17 +30,62 @@ A complete, production-ready cybersecurity dashboard that visualizes global phis
   - Package Delivery Scams
   - Password Reset Phishing
 
-### 4. **Live Statistics Dashboard** 📈
+#### 4. **Attack Pattern Heatmap** 🔥 (NEW!)
+- Hour-by-hour attack patterns (0:00 to 23:00)
+- Day-by-day breakdown (Monday to Sunday)
+- Color intensity shows frequency
+- Identify peak attack times
+
+#### 5. **Top 10 Targeted Domains** 📊 (NEW!)
+- Horizontal bar chart of most attacked domains
+- Color-coded by attack volume
+- Shows specific impersonation targets
+- Prioritize defense efforts
+
+#### 6. **Attack Type Distribution** 🥧 (NEW!)
+- Professional donut chart with percentages
+- Clear breakdown of attack methods
+- Interactive legend
+- Understand threat landscape
+
+#### 7. **URL Length Distribution** 📏 (NEW!)
+- Histogram of phishing URL lengths
+- Average length indicator
+- Pattern analysis for detection
+- Set URL filtering rules
+
+### Dashboard Features
+
+#### **Advanced Filtering System** 🎚️
+- **Time Range**: Last 24h, 7 days, 30 days, all time
+- **Attack Type**: Filter by specific attack methods
+- **Brand**: Filter by targeted brand
+- **Country**: Filter by geographic origin
+- All filters update all 7 visualizations in real-time
+
+#### **Auto-Refresh Toggle** ⏱️
+- Configurable intervals: 1, 5, or 15 minutes
+- Enable/disable on demand
+- Perfect for SOC monitoring
+- Respects cache to avoid API overload
+
+#### **Dark Mode** 🌙
+- Professional dark theme
+- Reduces eye strain
+- Perfect for 24/7 monitoring
+- Instant theme switching
+
+#### **Live Statistics Dashboard** 📈
 - Total attacks detected
 - Most targeted brand
 - Top source country
 - Most common attack type
 
-### 5. **Data Sources** 📡
+#### **Data Sources** 📡
 - **OpenPhish**: Real phishing feed (no API key needed)
 - **Sample Data Mode**: For demos and testing
-- Smart caching for performance
-- Auto-refresh capability
+- Smart caching for performance (1 hour TTL)
+- Multiple data source support
 
 ## 📁 Project Files Created
 
@@ -110,12 +157,13 @@ The dashboard successfully fetches and processes real phishing data:
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Dash + Bootstrap components
-- **Visualizations**: Plotly (choropleth, treemap, line charts)
-- **Data Processing**: Pandas + tldextract
+- **Frontend**: Dash 2.14.2 + Bootstrap components
+- **Visualizations**: Plotly 5.18.0 (choropleth, treemap, line charts, heatmap, bar chart, pie chart, histogram)
+- **Data Processing**: Pandas 2.1.4 + tldextract 5.1.1
 - **APIs**: OpenPhish feed, PhishTank (optional)
-- **Caching**: File-based with TTL
+- **Caching**: File-based with 1-hour TTL
 - **Deployment**: Flask + Gunicorn ready
+- **UI Components**: dash-bootstrap-components 1.5.0, Font Awesome icons
 
 ## 🔧 Customization Options
 
@@ -146,23 +194,29 @@ Edit `config.py`:
 
 ## 📈 Project Stats
 
-- **Lines of Code**: ~1,500+
-- **Files Created**: 13
-- **Visualizations**: 3 interactive charts
+- **Lines of Code**: ~2,200+
+- **Files Created**: 24
+- **Visualizations**: 7 interactive charts
+- **Callbacks**: 11 real-time update callbacks
 - **Data Sources**: 2 phishing feeds
 - **Brand Detection**: 15+ brands
 - **Attack Types**: 6+ categories
 - **Countries Tracked**: 50+ nations
+- **Filter Options**: 4 independent filter criteria
+- **Features**: Auto-refresh, Dark mode, Advanced filtering
 
 ## 🎓 What You Learned
 
 This project demonstrates:
 - ✅ **Web Dashboards**: Building with Dash/Plotly
-- ✅ **Data Visualization**: Maps, treemaps, timelines
+- ✅ **Data Visualization**: Maps, treemaps, timelines, heatmaps, bar charts, pie charts, histograms
 - ✅ **API Integration**: Fetching external data
 - ✅ **Data Processing**: URL parsing, classification
 - ✅ **Caching Strategies**: Performance optimization
 - ✅ **Cybersecurity**: Phishing detection & analysis
+- ✅ **Interactive Filtering**: Real-time data filtering across multiple visualizations
+- ✅ **UI/UX Design**: Dark mode, responsive layout, professional styling
+- ✅ **Callback Architecture**: Complex multi-output Dash callbacks
 
 ## 🚀 Next Steps & Extensions
 
@@ -187,20 +241,23 @@ This project demonstrates:
 ✅ **Fully Functional**: Dashboard starts and runs
 ✅ **Real Data**: Successfully fetches phishing URLs
 ✅ **Interactive**: All charts respond to data updates
-✅ **Professional**: Clean, modern UI design
+✅ **Professional**: Clean, modern UI design with dark mode
 ✅ **Documented**: Complete README and guides
 ✅ **Tested**: Data pipeline verified working
 ✅ **Production Ready**: Can be deployed immediately
+✅ **Advanced Features**: Auto-refresh, filters, 7 visualizations
 
 ## 📸 Dashboard Preview
 
 When running, you'll see:
-- 🔝 Header with refresh controls
+- 🔝 Header with refresh controls, auto-refresh toggle, dark mode toggle
+- 🎚️ Advanced filter bar (time, attack type, brand, country)
 - 📊 4 statistics cards with key metrics
 - 🗺️ Large interactive world map
-- 🎯 Brand treemap (left panel)
-- 📈 Attack timeline (right panel)
-- 🔄 Auto-updating data
+- 🎯 Brand treemap (left) | Attack timeline (right)
+- � Attack heatmap (left) | Top domains chart (right)
+- 🥧 Attack pie chart (left) | URL length histogram (right)
+- 🔄 Auto-updating data with configurable intervals
 
 ## 🎯 Use Cases
 
