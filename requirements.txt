@@ -1,0 +1,11 @@
+dash==2.14.2
+plotly==5.18.0
+pandas==2.1.4
+requests==2.31.0
+pycountry==23.12.11
+python-whois==0.8.0
+dnspython==2.4.2
+tldextract==5.1.1
+dash-bootstrap-components==1.5.0
+gunicorn==21.2.0
+geoip2==4.7.0
