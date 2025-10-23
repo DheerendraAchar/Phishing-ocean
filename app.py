@@ -95,45 +95,48 @@ def create_header():
                     ], id="refresh-button", color="primary", size="sm", className="w-100 mb-2"),
                     
                     # Auto-refresh controls
-                    dbc.Row([
-                        dbc.Col([
+                    html.Div([
+                        html.Div([
+                            html.Label("Auto-Refresh", className="me-2 mb-0 small"),
                             dbc.Switch(
                                 id="auto-refresh-toggle",
-                                label="Auto-Refresh",
                                 value=False,
-                                className="mb-2"
+                                className="d-inline-block"
                             )
-                        ], width=6),
-                        dbc.Col([
-                            dbc.Select(
-                                id="refresh-interval-select",
-                                options=[
-                                    {"label": "1 min", "value": "60000"},
-                                    {"label": "5 min", "value": "300000"},
-                                    {"label": "15 min", "value": "900000"},
-                                ],
-                                value="300000",
-                                size="sm",
-                                disabled=True
-                            )
-                        ], width=6)
-                    ], className="mb-2"),
+                        ], className="d-flex align-items-center mb-2"),
+                        dbc.Select(
+                            id="refresh-interval-select",
+                            options=[
+                                {"label": "1 min", "value": "60000"},
+                                {"label": "5 min", "value": "300000"},
+                                {"label": "15 min", "value": "900000"},
+                            ],
+                            value="300000",
+                            size="sm",
+                            disabled=True,
+                            className="mb-2"
+                        )
+                    ]),
                     
                     # Sample data toggle
-                    dbc.Switch(
-                        id="use-sample-data",
-                        label="Demo Mode",
-                        value=True,
-                        className="mt-1"
-                    ),
+                    html.Div([
+                        html.Label("Demo Mode", className="me-2 mb-0 small"),
+                        dbc.Switch(
+                            id="use-sample-data",
+                            value=True,
+                            className="d-inline-block"
+                        )
+                    ], className="d-flex align-items-center mb-2"),
                     
                     # Dark mode toggle
-                    dbc.Switch(
-                        id="dark-mode-toggle",
-                        label="Dark Mode",
-                        value=False,
-                        className="mt-2"
-                    )
+                    html.Div([
+                        html.Label("Dark Mode", className="me-2 mb-0 small"),
+                        dbc.Switch(
+                            id="dark-mode-toggle",
+                            value=False,
+                            className="d-inline-block"
+                        )
+                    ], className="d-flex align-items-center")
                 ], className="text-end")
             ], width=5)
         ], className="mb-4 align-items-center")
@@ -477,44 +480,48 @@ def update_filter_options(processed_data):
 
 def filter_data_by_criteria(data, date_range, attack_type, brand, country):
     """Filter data based on selected criteria"""
-    if not data:
-        return []
-    
-    filtered = list(data)
-    
-    # Date range filter
-    if date_range and date_range != 'all':
-        from datetime import datetime, timedelta
-        now = datetime.now()
+    try:
+        if not data:
+            return []
         
-        if date_range == '24h':
-            cutoff = now - timedelta(hours=24)
-        elif date_range == '7d':
-            cutoff = now - timedelta(days=7)
-        elif date_range == '30d':
-            cutoff = now - timedelta(days=30)
-        else:
-            cutoff = None
+        filtered = list(data)
         
-        if cutoff:
-            filtered = [
-                entry for entry in filtered
-                if entry.get('timestamp') and entry['timestamp'] >= cutoff
-            ]
-    
-    # Attack type filter
-    if attack_type and attack_type != 'all':
-        filtered = [entry for entry in filtered if entry.get('attack_type') == attack_type]
-    
-    # Brand filter
-    if brand and brand != 'all':
-        filtered = [entry for entry in filtered if entry.get('brand') == brand]
-    
-    # Country filter
-    if country and country != 'all':
-        filtered = [entry for entry in filtered if entry.get('country') == country]
-    
-    return filtered
+        # Date range filter
+        if date_range and date_range != 'all':
+            from datetime import datetime, timedelta
+            now = datetime.now()
+            
+            if date_range == '24h':
+                cutoff = now - timedelta(hours=24)
+            elif date_range == '7d':
+                cutoff = now - timedelta(days=7)
+            elif date_range == '30d':
+                cutoff = now - timedelta(days=30)
+            else:
+                cutoff = None
+            
+            if cutoff:
+                filtered = [
+                    entry for entry in filtered
+                    if entry.get('timestamp') and isinstance(entry.get('timestamp'), datetime) and entry['timestamp'] >= cutoff
+                ]
+        
+        # Attack type filter
+        if attack_type and attack_type != 'all':
+            filtered = [entry for entry in filtered if entry.get('attack_type') == attack_type]
+        
+        # Brand filter
+        if brand and brand != 'all':
+            filtered = [entry for entry in filtered if entry.get('brand') == brand]
+        
+        # Country filter
+        if country and country != 'all':
+            filtered = [entry for entry in filtered if entry.get('country') == country]
+        
+        return filtered
+    except Exception as e:
+        print(f"Error filtering data: {e}")
+        return data if data else []
 
 
 @app.callback(

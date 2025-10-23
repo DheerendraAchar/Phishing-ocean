@@ -71,10 +71,10 @@ class PhishingVisualizer:
         
         fig.update_layout(
             title={
-                'text': 'Global Phishing Attack Origins',
+                'text': 'Global Threat Map - Phishing Attack Origins',
                 'x': 0.5,
                 'xanchor': 'center',
-                'font': {'size': 22, 'color': '#1a1a1a', 'family': 'Arial, sans-serif'}
+                'font': {'size': 20, 'color': '#1a1a1a', 'family': 'Arial, sans-serif'}
             },
             geo=dict(
                 showframe=False,
@@ -195,11 +195,14 @@ class PhishingVisualizer:
                 'text': 'Attack Frequency Timeline',
                 'x': 0.5,
                 'xanchor': 'center',
-                'font': {'size': 22, 'color': '#1a1a1a', 'family': 'Arial, sans-serif'}
+                'y': 0.98,
+                'yanchor': 'top',
+                'font': {'size': 18, 'color': '#1a1a1a', 'family': 'Arial, sans-serif'}
             },
             xaxis_title='Date',
             yaxis_title='Number of Attacks',
             height=500,
+            margin=dict(t=80, b=50, l=50, r=50),
             hovermode='x unified',
             paper_bgcolor='white',
             plot_bgcolor='white',
