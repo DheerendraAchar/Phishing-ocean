@@ -495,11 +495,6 @@ def filter_data_by_criteria(data, date_range, attack_type, brand, country):
             return []
         
         filtered = list(data)
-        initial_count = len(filtered)
-        
-        print(f"\n=== FILTERING DEBUG ===")
-        print(f"Initial data count: {initial_count}")
-        print(f"Filters - Date: {date_range}, Attack: {attack_type}, Brand: {brand}, Country: {country}")
         
         # Date range filter
         if date_range and date_range != 'all':
@@ -516,8 +511,6 @@ def filter_data_by_criteria(data, date_range, attack_type, brand, country):
                 cutoff = None
             
             if cutoff:
-                before_count = len(filtered)
-                print(f"  Cutoff time: {cutoff}")
                 # Filter entries with valid timestamps within the date range
                 filtered_with_details = []
                 for entry in filtered:
@@ -533,29 +526,18 @@ def filter_data_by_criteria(data, date_range, attack_type, brand, country):
                         filtered_with_details.append(entry)
                 
                 filtered = filtered_with_details
-                print(f"  Sample timestamps: {[entry.get('timestamp')[:19] if isinstance(entry.get('timestamp'), str) else str(entry.get('timestamp'))[:19] for entry in filtered[:3]]}")
-                print(f"After date filter ({date_range}): {len(filtered)} (removed {before_count - len(filtered)})")
         
         # Attack type filter
         if attack_type and attack_type != 'all':
-            before_count = len(filtered)
             filtered = [entry for entry in filtered if entry.get('attack_type') == attack_type]
-            print(f"After attack type filter ({attack_type}): {len(filtered)} (removed {before_count - len(filtered)})")
         
         # Brand filter
         if brand and brand != 'all':
-            before_count = len(filtered)
             filtered = [entry for entry in filtered if entry.get('brand') == brand]
-            print(f"After brand filter ({brand}): {len(filtered)} (removed {before_count - len(filtered)})")
         
         # Country filter
         if country and country != 'all':
-            before_count = len(filtered)
             filtered = [entry for entry in filtered if entry.get('country') == country]
-            print(f"After country filter ({country}): {len(filtered)} (removed {before_count - len(filtered)})")
-        
-        print(f"Final filtered count: {len(filtered)}")
-        print(f"=== END FILTERING ===\n")
         
         return filtered
     except Exception as e:
