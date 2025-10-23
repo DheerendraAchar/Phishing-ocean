@@ -48,6 +48,13 @@ def fetch_and_process_data(use_sample=False):
         # Process data
         processed_data = processor.process_all(raw_data)
         
+        # Convert datetime objects to ISO strings for JSON serialization
+        for entry in processed_data:
+            if entry.get('timestamp') and isinstance(entry['timestamp'], datetime):
+                entry['timestamp'] = entry['timestamp'].isoformat()
+            if entry.get('submission_time') and isinstance(entry['submission_time'], datetime):
+                entry['submission_time'] = entry['submission_time'].isoformat()
+        
         # Update global storage
         app_data['raw_data'] = raw_data
         app_data['processed_data'] = processed_data
@@ -221,9 +228,10 @@ def create_visualizations():
                                 dcc.Dropdown(
                                     id="attack-type-filter",
                                     options=[],
-                                    value=None,
+                                    value="all",
                                     placeholder="All Attack Types",
-                                    className="small"
+                                    className="small",
+                                    clearable=False
                                 )
                             ], md=3),
                             dbc.Col([
@@ -231,9 +239,10 @@ def create_visualizations():
                                 dcc.Dropdown(
                                     id="brand-filter",
                                     options=[],
-                                    value=None,
+                                    value="all",
                                     placeholder="All Brands",
-                                    className="small"
+                                    className="small",
+                                    clearable=False
                                 )
                             ], md=3),
                             dbc.Col([
@@ -241,9 +250,10 @@ def create_visualizations():
                                 dcc.Dropdown(
                                     id="country-filter",
                                     options=[],
-                                    value=None,
+                                    value="all",
                                     placeholder="All Countries",
-                                    className="small"
+                                    className="small",
+                                    clearable=False
                                 )
                             ], md=3)
                         ])
@@ -470,10 +480,10 @@ def update_filter_options(processed_data):
     brands = sorted(set(entry.get('brand', 'Other') for entry in processed_data))
     countries = sorted(set(entry.get('country', 'Unknown') for entry in processed_data if entry.get('country') != 'Unknown'))
     
-    # Create options
-    attack_options = [{'label': at, 'value': at} for at in attack_types]
-    brand_options = [{'label': b, 'value': b} for b in brands]
-    country_options = [{'label': c, 'value': c} for c in countries]
+    # Create options with "All" as first option
+    attack_options = [{'label': 'All Attack Types', 'value': 'all'}] + [{'label': at, 'value': at} for at in attack_types]
+    brand_options = [{'label': 'All Brands', 'value': 'all'}] + [{'label': b, 'value': b} for b in brands]
+    country_options = [{'label': 'All Countries', 'value': 'all'}] + [{'label': c, 'value': c} for c in countries]
     
     return attack_options, brand_options, country_options
 
@@ -485,6 +495,11 @@ def filter_data_by_criteria(data, date_range, attack_type, brand, country):
             return []
         
         filtered = list(data)
+        initial_count = len(filtered)
+        
+        print(f"\n=== FILTERING DEBUG ===")
+        print(f"Initial data count: {initial_count}")
+        print(f"Filters - Date: {date_range}, Attack: {attack_type}, Brand: {brand}, Country: {country}")
         
         # Date range filter
         if date_range and date_range != 'all':
@@ -501,26 +516,52 @@ def filter_data_by_criteria(data, date_range, attack_type, brand, country):
                 cutoff = None
             
             if cutoff:
-                filtered = [
-                    entry for entry in filtered
-                    if entry.get('timestamp') and isinstance(entry.get('timestamp'), datetime) and entry['timestamp'] >= cutoff
-                ]
+                before_count = len(filtered)
+                print(f"  Cutoff time: {cutoff}")
+                # Filter entries with valid timestamps within the date range
+                filtered_with_details = []
+                for entry in filtered:
+                    ts = entry.get('timestamp')
+                    # Parse ISO string back to datetime if needed
+                    if ts and isinstance(ts, str):
+                        try:
+                            ts = datetime.fromisoformat(ts)
+                        except:
+                            ts = None
+                    
+                    if ts is not None and isinstance(ts, datetime) and ts >= cutoff:
+                        filtered_with_details.append(entry)
+                
+                filtered = filtered_with_details
+                print(f"  Sample timestamps: {[entry.get('timestamp')[:19] if isinstance(entry.get('timestamp'), str) else str(entry.get('timestamp'))[:19] for entry in filtered[:3]]}")
+                print(f"After date filter ({date_range}): {len(filtered)} (removed {before_count - len(filtered)})")
         
         # Attack type filter
         if attack_type and attack_type != 'all':
+            before_count = len(filtered)
             filtered = [entry for entry in filtered if entry.get('attack_type') == attack_type]
+            print(f"After attack type filter ({attack_type}): {len(filtered)} (removed {before_count - len(filtered)})")
         
         # Brand filter
         if brand and brand != 'all':
+            before_count = len(filtered)
             filtered = [entry for entry in filtered if entry.get('brand') == brand]
+            print(f"After brand filter ({brand}): {len(filtered)} (removed {before_count - len(filtered)})")
         
         # Country filter
         if country and country != 'all':
+            before_count = len(filtered)
             filtered = [entry for entry in filtered if entry.get('country') == country]
+            print(f"After country filter ({country}): {len(filtered)} (removed {before_count - len(filtered)})")
+        
+        print(f"Final filtered count: {len(filtered)}")
+        print(f"=== END FILTERING ===\n")
         
         return filtered
     except Exception as e:
         print(f"Error filtering data: {e}")
+        import traceback
+        traceback.print_exc()
         return data if data else []
 
 
