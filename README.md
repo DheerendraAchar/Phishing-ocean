@@ -31,23 +31,56 @@ A real-time interactive dashboard that visualizes global phishing attacks, track
 
 ## 🎬 Quick Start
 
+### For New Users Cloning This Repository
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/DheerendraAchar/Phishing-ocean.git
+cd Phishing-ocean
+
+# 2. Create virtual environment
+python3 -m venv .venv
+
+# 3. Activate virtual environment
+source .venv/bin/activate  # macOS/Linux
+# OR
+.venv\Scripts\activate     # Windows
+
+# 4. Install dependencies
+pip install -r requirements.txt
+
+# 5. Run the dashboard
+./run_dashboard.sh         # macOS/Linux
+# OR
+python app.py              # Windows or manual run
+
+# 6. Open browser to http://localhost:8050
+```
+
+**📖 Detailed Setup Guide**: See [SETUP_GUIDE.md](SETUP_GUIDE.md) for complete instructions and troubleshooting.
+
+---
+
 ### Prerequisites
 
 - Python 3.8 or higher
 - pip package manager
+- Git (for cloning)
 
-### Installation
+### Installation (Detailed)
 
-1. **Clone or navigate to the project directory**:
+1. **Clone the repository**:
    ```bash
-   cd /Users/admin/Documents/davproject
+   git clone https://github.com/DheerendraAchar/Phishing-ocean.git
+   cd Phishing-ocean
    ```
 
 2. **Create a virtual environment** (recommended):
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On macOS/Linux
+   python3 -m venv .venv
+   source .venv/bin/activate  # On macOS/Linux
    # or
+   .venv\Scripts\activate     # On Windows
    venv\Scripts\activate  # On Windows
    ```
 
